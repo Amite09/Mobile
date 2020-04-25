@@ -189,6 +189,58 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e482b39d7ed22034ca6a61dd145ee82b, type: 3}
+--- !u!1 &347797777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 347797779}
+  - component: {fileID: 347797778}
+  m_Layer: 0
+  m_Name: BlockSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &347797778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347797777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b526944718c400c47a7e60bb03f36729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blocks:
+  - {fileID: 5998919275888600160, guid: 2a46938aa5665b843b4665aa0f0bf1c0, type: 3}
+  - {fileID: 8890428905186188596, guid: e9543f4921a889447a9ae0ab0509d2f0, type: 3}
+  - {fileID: 5580898520984317806, guid: 6a9c172a54d607048a0f2dbea4045c77, type: 3}
+  - {fileID: 708734225037976860, guid: 6e6e97dfe72cac540bf5a3415365c5c3, type: 3}
+  waitingForNextSpawn: 2
+  theCountdown: 2
+  xMin: -1.4
+  xMax: 1.4
+--- !u!4 &347797779
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347797777}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -28.357113, y: -37.77979, z: 5.072639}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &504357002
 PrefabInstance:
   m_ObjectHideFlags: 0

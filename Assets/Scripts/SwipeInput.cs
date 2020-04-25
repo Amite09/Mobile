@@ -16,11 +16,10 @@ public class SwipeInput : MonoBehaviour
 	public bool swipedUp = false;
 	public bool swipedDown = false;
 	
-	
 	public bool debugWithArrowKeys = true;
 
 	Vector2 startPos;
-	float startTime;
+	public float startTime;
 
 	public void Update()
 	{
