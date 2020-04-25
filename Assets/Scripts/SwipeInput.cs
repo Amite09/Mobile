@@ -18,7 +18,7 @@ public class SwipeInput : MonoBehaviour
 	
 	public bool debugWithArrowKeys = true;
 
-	Vector2 startPos;
+	public Vector2 startPos;
 	public float startTime;
 
 	public void Update()

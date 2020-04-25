@@ -30,9 +30,11 @@ public class Blocks : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider col){
-        if(col.transform.root.TryGetComponent(out Projectiles p) && p.Color == this.color){
-            p.gameObject.SetActive(false);
-            gameObject.SetActive(false);           
+        if(col.transform.root.TryGetComponent(out Projectiles p)){
+            if (p.Color == this.color){
+                gameObject.SetActive(false); 
+            }
+            p.gameObject.SetActive(false);         
         }
     }
 

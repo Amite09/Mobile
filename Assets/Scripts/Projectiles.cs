@@ -5,7 +5,6 @@ using UnityEngine;
 public class Projectiles : MonoBehaviour
 {
 
-    private float speed = 10f;
     private bool canMove = true;
     private string color;
     public Vector3 target;
@@ -45,8 +44,8 @@ public class Projectiles : MonoBehaviour
     }
 
     void Move() {
-        target.x *= 1.2f;
-        target.y *= 1.2f;
+        //target.x *= 1.1f;
+        //target.y *= 1.3f;
         target.z = 5;
         transform.position = Vector3.MoveTowards(transform.position, target, 0.1f);
     }

@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour
 
     private Time timeTouched;
     private Time timeLeft;
+    private float startTouch;
 
     public bool swipingRight = false;
     public bool swipingLeft = false;
@@ -76,10 +77,16 @@ public class PlayerControl : MonoBehaviour
 
         foreach (Touch touch in Input.touches){
             if (touch.fingerId == 0){
-                if (Input.GetTouch(0).phase == TouchPhase.Ended && Time.time - input.startTime < 0.1f){
+                
+                if (Input.GetTouch(0).phase == TouchPhase.Began){
+                    startTouch = Time.time;
+                }
+                if (Input.GetTouch(0).phase == TouchPhase.Ended && Time.time - startTouch < 0.1f){
                     Vector3 _touchPosition = new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 5);
                     GameObject proj = Instantiate(projs[currentState], projSpawnPos, Quaternion.identity);
                     Vector3 worldtouchPos = Camera.main.ScreenToWorldPoint(_touchPosition);
+                    worldtouchPos.x *= 10;
+                    worldtouchPos.y *= 10;
                     proj.GetComponent<Projectiles>().Target = worldtouchPos;
                     proj.GetComponent<Projectiles>().Color = states[currentState];
                 }
