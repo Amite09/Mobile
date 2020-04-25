@@ -9,6 +9,7 @@ public class Projectiles : MonoBehaviour
     private bool canMove = true;
     private string color;
     public Vector3 target;
+    private Rigidbody body;
 
     public string Color {
         get {
@@ -31,7 +32,8 @@ public class Projectiles : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(DisableProj(5f));
+        body = GetComponent<Rigidbody>();
+        StartCoroutine(DisableProj(2f));
     }
 
     // Update is called once per frame
@@ -43,15 +45,14 @@ public class Projectiles : MonoBehaviour
     }
 
     void Move() {
-        Vector3 temp = transform.position;
-        temp.x += target.x/20;
-        temp.y += target.y/20;
-        transform.position = temp;
+        target.x *= 1.2f;
+        target.y *= 1.2f;
+        transform.position = Vector3.MoveTowards(transform.position, target, 0.1f);
     }
 
     IEnumerator DisableProj(float timer) {
         yield return new WaitForSeconds(timer);
-        gameObject.SetActive (false);
+        gameObject.SetActive(false);
     }
 
 }

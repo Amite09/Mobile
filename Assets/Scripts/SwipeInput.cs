@@ -5,7 +5,7 @@ using UnityEngine;
 public class SwipeInput : MonoBehaviour
 {
     // If the touch is longer than MAX_SWIPE_TIME, we dont consider it a swipe
-	public const float MAX_SWIPE_TIME = 0.5f; 
+	public const float MAX_SWIPE_TIME = 0.3f; 
 	
 	// Factor of the screen width that we consider a swipe
 	// 0.17 works well for portrait mode 16:9 phone

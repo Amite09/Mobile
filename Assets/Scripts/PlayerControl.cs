@@ -5,14 +5,16 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
 
-    //enum states{Red, Green, Yellow, Blue};
-
     private SwipeInput input;
+
+    private Time timeTouched;
+    private Time timeLeft;
 
     public bool swipingRight = false;
     public bool swipingLeft = false;
 
     public GameObject[] projs;
+    public Vector3 projSpawnPos;
 
     public string[] states;
     public int currentState;
@@ -67,6 +69,7 @@ public class PlayerControl : MonoBehaviour
 
     void Shoot(){
 
+
         if(swipingLeft || swipingRight){
             return;
         }
@@ -74,8 +77,11 @@ public class PlayerControl : MonoBehaviour
         foreach (Touch touch in Input.touches){
             if (touch.fingerId == 0){
                 if (Input.GetTouch(0).phase == TouchPhase.Began){
-                    GameObject proj = Instantiate(projs[currentState], transform.position, Quaternion.identity);
                     Vector3 _touchPosition = new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 5);
+                    if (_touchPosition.y < 190){
+                        return;
+                    }
+                    GameObject proj = Instantiate(projs[currentState], projSpawnPos, Quaternion.identity);
                     Vector3 worldtouchPos = Camera.main.ScreenToWorldPoint(_touchPosition);
                     proj.GetComponent<Projectiles>().Target = worldtouchPos;
                     proj.GetComponent<Projectiles>().Color = states[currentState];
@@ -84,8 +90,11 @@ public class PlayerControl : MonoBehaviour
         }
 
         if(Input.GetMouseButtonDown(0)){
-            GameObject proj = Instantiate(projs[currentState], transform.position, Quaternion.identity);
             Vector3 _mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5);
+            if (_mousePosition.y < 190){
+                return;
+            }
+            GameObject proj = Instantiate(projs[currentState], projSpawnPos, Quaternion.identity);
             Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(_mousePosition);
             proj.GetComponent<Projectiles>().Target = worldMousePos;
             proj.GetComponent<Projectiles>().Color = states[currentState];
