@@ -44,9 +44,7 @@ public class Projectiles : MonoBehaviour
     }
 
     void Move() {
-        //target.x *= 1.1f;
-        //target.y *= 1.3f;
-        target.z = 5;
+        target.z = 10;
         transform.position = Vector3.MoveTowards(transform.position, target, 0.1f);
     }
 

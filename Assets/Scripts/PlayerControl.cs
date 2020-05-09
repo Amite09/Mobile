@@ -25,16 +25,16 @@ public class PlayerControl : MonoBehaviour
                 Vector3 _touchPosition = new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 5);
                 Vector3 worldtouchPos = Camera.main.ScreenToWorldPoint(_touchPosition);
 
-                if(worldtouchPos.x >= 0 && worldtouchPos.y < 0.5 && j == 0){
+                if(worldtouchPos.x >= 0 && worldtouchPos.y < 0.3 && j == 0){
                     currentState = (currentState == 0 ? currentState + 3 : currentState - 1);                   
                     StartCoroutine(rotatePlayer("Left"));
-                } else if(worldtouchPos.x < 0 && worldtouchPos.y < 0.5 && j == 0){
+                } else if(worldtouchPos.x < 0 && worldtouchPos.y < 0.3 && j == 0){
                     currentState = (currentState == 3 ? currentState - 3 : currentState + 1);
                     StartCoroutine(rotatePlayer("Right"));
-                } else if(worldtouchPos.y > 0.5 && touch.phase == TouchPhase.Began) {
+                } else if(worldtouchPos.y > 0.3 && touch.phase == TouchPhase.Began) {
                     GameObject proj = Instantiate(projs[currentState], projSpawnPos, Quaternion.identity);
-                    worldtouchPos.x *= 10;
-                    worldtouchPos.y *= 10;
+                    worldtouchPos.x *= 100;
+                    worldtouchPos.y *= 100;
                     proj.GetComponent<Projectiles>().Target = worldtouchPos;
                     proj.GetComponent<Projectiles>().Color = states[currentState];
                 }
