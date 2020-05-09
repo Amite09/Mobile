@@ -10,53 +10,79 @@ public class PlayerControl : MonoBehaviour
     public string[] states;
     public int currentState;
 
-    private int j = 0;
+    public bool super;
 
+    private int angle = 0;
 
     // Update is called once per frame
     void Update()
     {
-        checkTouches();
+        if(Helper.super && !super){
+            super = true;
+            StartCoroutine(disableSuper());
+        }
+        if(!Helper.gameOver){
+            checkTouches();
+        }
+
     }
+
+
 
     void checkTouches(){
         foreach (Touch touch in Input.touches){
             if (touch.fingerId == 0){
                 Vector3 _touchPosition = new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 5);
                 Vector3 worldtouchPos = Camera.main.ScreenToWorldPoint(_touchPosition);
-
-                if(worldtouchPos.x >= 0 && worldtouchPos.y < 0.3 && j == 0){
-                    currentState = (currentState == 0 ? currentState + 3 : currentState - 1);                   
-                    StartCoroutine(rotatePlayer("Left"));
-                } else if(worldtouchPos.x < 0 && worldtouchPos.y < 0.3 && j == 0){
-                    currentState = (currentState == 3 ? currentState - 3 : currentState + 1);
-                    StartCoroutine(rotatePlayer("Right"));
-                } else if(worldtouchPos.y > 0.3 && touch.phase == TouchPhase.Began) {
-                    GameObject proj = Instantiate(projs[currentState], projSpawnPos, Quaternion.identity);
-                    worldtouchPos.x *= 100;
-                    worldtouchPos.y *= 100;
-                    proj.GetComponent<Projectiles>().Target = worldtouchPos;
-                    proj.GetComponent<Projectiles>().Color = states[currentState];
+                if(angle == 0){
+                    if(worldtouchPos.x >= 0 && worldtouchPos.y < 0.3){
+                        currentState = (currentState == 0 ? currentState + 3 : currentState - 1);                   
+                        StartCoroutine(rotatePlayer("Left"));
+                    } else if(worldtouchPos.x < 0 && worldtouchPos.y < 0.3){
+                        currentState = (currentState == 3 ? currentState - 3 : currentState + 1);
+                        StartCoroutine(rotatePlayer("Right"));
+                    } 
+                }
+                if(worldtouchPos.y > 0.3) {
+                    if(!Helper.super && touch.phase == TouchPhase.Began){
+                        GameObject proj = Instantiate(projs[currentState], projSpawnPos, Quaternion.identity);
+                        worldtouchPos.x *= 100;
+                        worldtouchPos.y *= 100;
+                        proj.GetComponent<Projectiles>().Target = worldtouchPos;
+                        proj.GetComponent<Projectiles>().Color = states[currentState];
+                    } else if (Helper.super) {
+                        GameObject proj = Instantiate(projs[currentState], projSpawnPos, Quaternion.identity);
+                        worldtouchPos.x *= 100;
+                        worldtouchPos.y *= 100;
+                        proj.GetComponent<Projectiles>().Target = worldtouchPos;
+                        proj.GetComponent<Projectiles>().Color = states[currentState];
+                    }
                 }
             }
         }
     }
 
+    IEnumerator disableSuper(){
+        yield return new WaitForSeconds(5f);
+        Helper.super = false;
+        super = false;
+    }
+
     IEnumerator rotatePlayer(string direction){
         if (direction == "Right"){
-            while (j < 18){
+            while (angle < 18){
                 transform.Rotate(0, 0, 5);
-                j++;
+                angle++;
                 yield return new WaitForEndOfFrame();
             }
         } else if (direction == "Left"){
-            while (j < 18){
+            while (angle < 18){
                 transform.Rotate(0, 0, -5);
-                j++;
+                angle++;
                 yield return new WaitForEndOfFrame();
             }
         }
-        j = 0;
+        angle = 0;
     }
 
 

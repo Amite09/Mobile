@@ -6,9 +6,13 @@ public class BlockSpawner : MonoBehaviour
 {
 
     public GameObject[] blocks;
+    public GameObject SuperBox;
 
     public float waitingForNextSpawn;
     public float theCountdown;
+
+    public float superBoxNextSpawn;
+    public float superBoxCountdown;
  
     // the range of X
     [Header ("X Spawn Range")]
@@ -19,11 +23,16 @@ public class BlockSpawner : MonoBehaviour
     public void Update(){
          // timer to spawn the next goodie Object
          theCountdown -= Time.deltaTime;
-         if(theCountdown <= 0)
-         {
+         if(theCountdown <= 0){
              SpawnBlock();
              theCountdown = waitingForNextSpawn;
-         }
+        }
+
+        superBoxCountdown -= Time.deltaTime;
+        if(superBoxCountdown <= 0){
+             SpawnSuperBox();
+             superBoxCountdown = superBoxNextSpawn;
+        }
     }
 
     void SpawnBlock(){
@@ -39,5 +48,13 @@ public class BlockSpawner : MonoBehaviour
         Instantiate(block1, pos1, transform.rotation);
         Instantiate(block2, pos2, transform.rotation);
     }
+
+    void SpawnSuperBox() {
+        Vector3 pos = new Vector3(Random.Range(xMin,xMax), 10, 10);
+        GameObject box = SuperBox;
+        Debug.Log("as");
+        Instantiate(box, pos, transform.rotation);
+    }
+
 
 }

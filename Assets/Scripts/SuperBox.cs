@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blocks : MonoBehaviour
+public class SuperBox : MonoBehaviour
 {
-
-    public float speed = 0.01f;
-    public string color;
+    public float speed = 0.02f;
 
     // Start is called before the first frame update
     void Start()
@@ -18,32 +16,21 @@ public class Blocks : MonoBehaviour
     void Update()
     {
         moveBlock();
-        checkHeight();
         
     }
 
     void moveBlock(){
 
         transform.Rotate(0, 1, 0);
-        if(!Helper.gameOver){
-            transform.position = new Vector3(transform.position.x, transform.position.y - speed, transform.position.z);
-        }
+        transform.position = new Vector3(transform.position.x, transform.position.y - speed, transform.position.z);
+
     }
 
     void OnTriggerEnter(Collider col){
         if(col.transform.root.TryGetComponent(out Projectiles p)){
-            if (p.Color == this.color){    
-                Helper.score++;            
-                gameObject.SetActive(false); 
-            }
+            Helper.super = true;
+            gameObject.SetActive(false);
             p.gameObject.SetActive(false);         
-        }
-    }
-
-    void checkHeight(){
-        if (this.transform.position.y < 1.2){            
-            Helper.gameOver = true;
-            this.gameObject.SetActive(false);
         }
     }
 
@@ -52,5 +39,4 @@ public class Blocks : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-
 }
