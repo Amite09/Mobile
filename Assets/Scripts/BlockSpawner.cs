@@ -37,7 +37,7 @@ public class BlockSpawner : MonoBehaviour
 
     void SpawnBlock(){
         Vector3 pos1 = new Vector3(Random.Range(xMin,xMax), 10, 10);
-        Vector3 pos2 = new Vector3(Random.Range(xMin,xMax), 10, 10);
+        Vector3 pos2 = new Vector3(Random.Range(xMin,xMax), 10.5f, 10);
         GameObject block1 = blocks[Random.Range(0, blocks.Length)];
         GameObject block2 = blocks[Random.Range(0, blocks.Length)];
         if(pos1.x >= pos2.x){
@@ -52,7 +52,6 @@ public class BlockSpawner : MonoBehaviour
     void SpawnSuperBox() {
         Vector3 pos = new Vector3(Random.Range(xMin,xMax), 10, 10);
         GameObject box = SuperBox;
-        Debug.Log("as");
         Instantiate(box, pos, transform.rotation);
     }
 
