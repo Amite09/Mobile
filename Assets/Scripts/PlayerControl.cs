@@ -35,12 +35,15 @@ public class PlayerControl : MonoBehaviour
     }
 
     void checkUpgrade(){
-        if (Helper.score == pointsToUpgrade){
+        if (Helper.score >= pointsToUpgrade){
             pointsToUpgrade += 25;
-            maxShots = maxShots < 10 ? maxShots + 1: maxShots; 
+            maxShots = maxShots < 10 ? maxShots + 1: maxShots;
+            Helper.armorShotsLeft += 5;
+            Helper.blockSpeed = Helper.blockSpeed == 0.001f ? Helper.blockSpeed : Helper.blockSpeed += 0.0005f; 
             if(GameObject.Find("BlockSpawner").TryGetComponent(out BlockSpawner b)){
-                b.theCountdown = b.theCountdown > 0.5f ? b.theCountdown -= 0.1f : 0.5f;
-                b.superBoxCountdown  = b.superBoxCountdown > 5f ? b.superBoxCountdown -= 1 : 5f;
+                b.waitingForNextSpawn = b.waitingForNextSpawn > 0.5f ? b.waitingForNextSpawn -= 0.1f : 0.5f;
+                b.superBoxNextSpawn  = b.superBoxNextSpawn > 5f ? b.superBoxNextSpawn -= 3 : 5f;
+                b.specialBlockNextSpawn = b.specialBlockNextSpawn > 5f ? b.specialBlockNextSpawn -= 1 : 5f;
             }            
         }
     }

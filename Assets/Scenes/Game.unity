@@ -469,10 +469,15 @@ MonoBehaviour:
   - {fileID: 708734225037976860, guid: 6e6e97dfe72cac540bf5a3415365c5c3, type: 3}
   SuperBox: {fileID: 1682427939822924945, guid: c39f9feb15058b2418f59cd55eba04f2,
     type: 3}
-  waitingForNextSpawn: 2
-  theCountdown: 2
+  specialBlocks:
+  - {fileID: 3832110477618835911, guid: 211bca10b0590da4bb21eba4e0612bda, type: 3}
+  waitingForNextSpawn: 1
+  theCountdown: 1
   superBoxNextSpawn: 20
   superBoxCountdown: 5
+  specialBlockNextSpawn: 10
+  specialBlockCountdown: 10
+  lastSpecialBlock: {fileID: 0}
   xMin: -1.4
   xMax: 1.06
 --- !u!4 &347797779
