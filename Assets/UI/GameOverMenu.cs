@@ -35,11 +35,6 @@ public class GameOverMenu : MonoBehaviour
     }
 
     void DisableMenu(){
-        Helper.gameOver = false;
-        Helper.score = 0;
-        Helper.superFireRate = false;
-        Time.timeScale = 1f;
-        menuEnabled = false;
         MenuUI.SetActive(false);
     }
 
@@ -54,6 +49,7 @@ public class GameOverMenu : MonoBehaviour
     }
 
     IEnumerator goToScene(string scene){
+        menuEnabled = false;
         yield return new WaitForSeconds(0f);
         SceneManager.LoadSceneAsync(scene);
     }
