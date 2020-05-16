@@ -35,8 +35,7 @@ public class Blocks : MonoBehaviour
             if (p.Color == this.color){    
                 Helper.score++;            
                 gameObject.SetActive(false); 
-            }
-            p.gameObject.SetActive(false);         
+            }       
         }
     }
 

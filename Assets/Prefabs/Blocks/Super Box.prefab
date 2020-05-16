@@ -120,4 +120,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.02
-  color: 
+  superIndex: 0
+  projs:
+  - {fileID: 1890458292962885173, guid: e1fa8faa09f47f741b77ba50b7746aaf, type: 3}
+  - {fileID: 5099173225954487115, guid: 3a0d3b6899486d645b2e4a037f53f30a, type: 3}
+  - {fileID: 8926248214469212, guid: 8b1b32b345c4e534580721565d55540c, type: 3}
+  - {fileID: 5705004180832789098, guid: e590eeefc8dfc6e45b63fca07f538e2f, type: 3}
+  states:
+  - Red
+  - Green
+  - Yellow
+  - Blue
+  currentState: 0

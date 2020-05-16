@@ -5,10 +5,11 @@ using UnityEngine;
 public class Projectiles : MonoBehaviour
 {
 
-    private bool canMove = true;
     private string color;
-    public Vector3 target;
+    private Vector3 target;
     private Rigidbody body;
+
+    public bool bounce = false;
 
     public string Color {
         get {
@@ -32,20 +33,33 @@ public class Projectiles : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody>();
-        StartCoroutine(DisableProj(2f));
+        StartCoroutine(DisableProj(5f));
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(canMove){
-            Move();
-        }
+        Move();
+        RemoveProj();
     }
 
     void Move() {
         target.z = 10;
         transform.position = Vector3.MoveTowards(transform.position, target, 0.1f);
+    }
+
+    void OnTriggerEnter(Collider col){        
+        if(bounce && GameObject.Find(color + " Block(Clone)").TryGetComponent(out Blocks cb)){
+            target = cb.transform.position;
+        } else if(!col.transform.root.TryGetComponent(out Projectiles p)){
+            gameObject.SetActive(false);
+        }     
+    }
+
+    void RemoveProj(){
+        if (bounce && GameObject.Find(color + " Block(Clone)") == null){
+            gameObject.SetActive(false);
+        }
     }
 
     IEnumerator DisableProj(float timer) {
