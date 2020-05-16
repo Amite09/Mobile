@@ -6,7 +6,9 @@ public class Helper
 {
     public static int score = 0;
 
-    public static bool super = false;
+    public static float blockSpeed = 0.0075f;
+
+    public static bool superFireRate = false;
 
     public static bool gameOver = false;
 

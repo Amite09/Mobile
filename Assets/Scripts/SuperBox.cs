@@ -37,7 +37,7 @@ public class SuperBox : MonoBehaviour
         }
         switch(superIndex){
             case 1: 
-                Helper.super = true;
+                Helper.superFireRate = true;
                 gameObject.SetActive(false);
                 p.gameObject.SetActive(false);
                 break;

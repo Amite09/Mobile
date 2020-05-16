@@ -5,13 +5,13 @@ using UnityEngine;
 public class Blocks : MonoBehaviour
 {
 
-    public float speed = 0.01f;
+    public float speed;
     public string color;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        speed = Helper.blockSpeed;
     }
 
     // Update is called once per frame

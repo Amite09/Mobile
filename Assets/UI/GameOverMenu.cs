@@ -37,7 +37,7 @@ public class GameOverMenu : MonoBehaviour
     void DisableMenu(){
         Helper.gameOver = false;
         Helper.score = 0;
-        Helper.super = false;
+        Helper.superFireRate = false;
         Time.timeScale = 1f;
         menuEnabled = false;
         MenuUI.SetActive(false);
