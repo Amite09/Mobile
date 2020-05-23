@@ -27,20 +27,22 @@ public class BlockSpawner : MonoBehaviour
  
     public void Update(){
 
-        superBoxCountdown -= Time.deltaTime;
-        specialBlockCountdown -= Time.deltaTime;
-        theCountdown -= Time.deltaTime;
+        if(!Helper.bossFight){
+            superBoxCountdown -= Time.deltaTime;
+            specialBlockCountdown -= Time.deltaTime;
+            theCountdown -= Time.deltaTime;
 
-        if(specialBlockCountdown <= 0 && theCountdown <= 0){
+            if(specialBlockCountdown <= 0 && theCountdown <= 0){
             SpawnSpecialBlock();
             specialBlockCountdown = specialBlockNextSpawn;
-        } else if (theCountdown <= 0 && (specialBlockCountdown <= specialBlockNextSpawn * 0.9f && specialBlockCountdown >= specialBlockNextSpawn * 0.1f)){
-            SpawnBlock();
-            theCountdown = waitingForNextSpawn;
-        }
-        if(superBoxCountdown <= 0){
-            SpawnSuperBox();
-            superBoxCountdown = superBoxNextSpawn;
+            } else if (theCountdown <= 0 && (specialBlockCountdown <= specialBlockNextSpawn * 0.9f && specialBlockCountdown >= specialBlockNextSpawn * 0.1f)){
+                SpawnBlock();
+                theCountdown = waitingForNextSpawn;
+            }
+            if(superBoxCountdown <= 0){
+                SpawnSuperBox();
+                superBoxCountdown = superBoxNextSpawn;
+            }
         }
     }
 

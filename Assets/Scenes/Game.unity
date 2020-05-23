@@ -471,6 +471,7 @@ MonoBehaviour:
     type: 3}
   specialBlocks:
   - {fileID: 3832110477618835911, guid: 211bca10b0590da4bb21eba4e0612bda, type: 3}
+  - {fileID: 1063838837132980702, guid: 126fbb6a842702d4f949cb1d26390108, type: 3}
   waitingForNextSpawn: 1
   theCountdown: 1
   superBoxNextSpawn: 20
@@ -797,6 +798,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6248678d0ffe480439630d7335d222bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreChecker: 0
+  boss: {fileID: 3596889736904265965, guid: 2dfbfd7cd87ef364ebad8591e3e9ae81, type: 3}
 --- !u!4 &633987596
 Transform:
   m_ObjectHideFlags: 0

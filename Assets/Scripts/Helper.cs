@@ -4,14 +4,28 @@ using UnityEngine;
 
 public class Helper
 {
-    public static int score = 0;
+    public static int score;
 
-    public static float blockSpeed = 0.0075f;
+    public static int playerMaxShots;
+
+    public static int pointsToUpgrade;
+
+    public static float blockSpeed;
+
+    public static float bossSpeed;
     
-    public static int armorShotsLeft = 5;
+    public static int armorShotsLeft;
 
-    public static bool superFireRate = false;
+    public static int colorBlockShotsLeft;
 
-    public static bool gameOver = false;
+    public static int bossShotsLeft;
+
+    public static bool superFireRate;
+
+    public static int pointsToBoss;
+
+    public static bool bossFight;
+
+    public static bool gameOver;
 
 }

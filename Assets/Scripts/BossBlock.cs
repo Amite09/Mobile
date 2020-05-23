@@ -2,17 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmorBlock : MonoBehaviour
+public class BossBlock : MonoBehaviour
 {
 
     public float speed;
     public int shotsLeft;
 
+    public Material[] colors;
+    public string color;
+
     // Start is called before the first frame update
     void Start()
     {
-        speed = Helper.blockSpeed;
-        shotsLeft = Helper.armorShotsLeft;
+        speed = Helper.bossSpeed;
+        shotsLeft = Helper.bossShotsLeft;
+        int rand = Random.Range(0, colors.Length);
+        GetComponent<MeshRenderer>().material = colors[rand];
+        this.color = colors[rand].ToString().Substring(0, colors[rand].ToString().IndexOf(" "));
     }
 
     // Update is called once per frame
@@ -32,15 +38,26 @@ public class ArmorBlock : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider col){
-        if(col.transform.root.TryGetComponent(out Projectiles p)){
+        if(col.transform.root.TryGetComponent(out Projectiles p) && p.Color == this.color){
             shotsLeft--;
             if(shotsLeft == 0){
                 Helper.score += 5;
+                Helper.bossFight = false;
+                Helper.bossShotsLeft *= 2;
                 gameObject.SetActive(false);
+            }
+            if(Random.Range(0f,1f) > 0.9){
+                changeColor();
             }
         }
     }
-    
+
+    void changeColor(){
+        int rand = Random.Range(0, colors.Length);
+        GetComponent<MeshRenderer>().material = colors[rand];
+        this.color = colors[rand].ToString().Substring(0, colors[rand].ToString().IndexOf(" "));
+    }
+
     void checkHeight(){
         if (this.transform.position.y < 1.2){            
             Helper.gameOver = true;

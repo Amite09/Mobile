@@ -7,8 +7,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject[] projs;
     public Vector3 projSpawnPos;
 
-    public int maxShots;
-    public int pointsToUpgrade = 25;
+
 
 
     public string[] states;
@@ -29,24 +28,9 @@ public class PlayerControl : MonoBehaviour
         if(!Helper.gameOver){
             checkTouches();
         }
-
-        checkUpgrade();
-
     }
 
-    void checkUpgrade(){
-        if (Helper.score >= pointsToUpgrade){
-            pointsToUpgrade += 25;
-            maxShots = maxShots < 10 ? maxShots + 1: maxShots;
-            Helper.armorShotsLeft += 5;
-            Helper.blockSpeed = Helper.blockSpeed == 0.001f ? Helper.blockSpeed : Helper.blockSpeed += 0.0005f; 
-            if(GameObject.Find("BlockSpawner").TryGetComponent(out BlockSpawner b)){
-                b.waitingForNextSpawn = b.waitingForNextSpawn > 0.5f ? b.waitingForNextSpawn -= 0.1f : 0.5f;
-                b.superBoxNextSpawn  = b.superBoxNextSpawn > 5f ? b.superBoxNextSpawn -= 3 : 5f;
-                b.specialBlockNextSpawn = b.specialBlockNextSpawn > 5f ? b.specialBlockNextSpawn -= 1 : 5f;
-            }            
-        }
-    }
+
      
 
     void checkTouches(){
@@ -79,7 +63,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     IEnumerator shoot(Vector3 t){
-        for(int i = 0; i < maxShots; i++){
+        for(int i = 0; i < Helper.playerMaxShots; i++){
             GameObject proj = Instantiate(projs[currentState], projSpawnPos, Quaternion.identity);
             if(i != 0){
                 t.x = Random.Range(0.7f * t.x, 1.3f * t.x);
