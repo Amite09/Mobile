@@ -7,9 +7,6 @@ public class PlayerControl : MonoBehaviour
     public GameObject[] projs;
     public Vector3 projSpawnPos;
 
-
-
-
     public string[] states;
     public int currentState;
 
@@ -59,6 +56,16 @@ public class PlayerControl : MonoBehaviour
                     }
                 }
             }
+        }
+
+        if(Input.GetMouseButtonDown(0)){
+            GameObject proj = Instantiate(projs[currentState], transform.position, Quaternion.identity);
+            Vector3 _mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5);
+            Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(_mousePosition);
+            worldMousePos.x *= 100;
+            worldMousePos.y *= 100;
+            proj.GetComponent<Projectiles>().Target = worldMousePos;
+            proj.GetComponent<Projectiles>().Color = states[currentState];
         }
     }
 

@@ -478,6 +478,7 @@ MonoBehaviour:
   superBoxCountdown: 5
   specialBlockNextSpawn: 10
   specialBlockCountdown: 10
+  lastSpawnPosition: {x: 0, y: 0, z: 0}
   xMin: -1.4
   xMax: 1.06
 --- !u!4 &347797779
@@ -1077,7 +1078,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0.14780933, y: 0, z: 0, w: 0.9890159}
-  m_LocalPosition: {x: 0, y: 0, z: -3.058}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
