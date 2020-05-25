@@ -9,6 +9,7 @@ public class GameStart : MonoBehaviour
     public GameObject boss;
 
     void Awake(){
+        Helper.activeBlocks = 0;
         Helper.pointsToUpgrade = 25;
         Helper.pointsToBoss = 50;
         Helper.playerMaxShots = 1;
@@ -59,12 +60,17 @@ public class GameStart : MonoBehaviour
         scoreChecker = Helper.score;
         if (scoreChecker >= Helper.pointsToBoss){
             Helper.pointsToBoss *= 2; 
-            scoreChecker = Helper.score - 150;
             Helper.bossFight = true;
-            summonBoss();
+            StartCoroutine(waitForEmptyScreen());
         }
         
     }
+
+    IEnumerator waitForEmptyScreen(){
+        yield return new WaitUntil(() => Helper.activeBlocks == 0);
+        summonBoss();
+    }
+
 
     void summonBoss(){
         Vector3 pos = new Vector3(0, 10, 10);

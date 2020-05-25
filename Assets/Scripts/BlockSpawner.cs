@@ -18,6 +18,8 @@ public class BlockSpawner : MonoBehaviour
     public float specialBlockNextSpawn;
     public float specialBlockCountdown;
 
+    public Vector3 lastSpawnPosition;
+
  
     // the range of X
     [Header ("X Spawn Range")]
@@ -47,15 +49,25 @@ public class BlockSpawner : MonoBehaviour
     }
 
     void SpawnBlock(){
-        Vector3 pos = new Vector3(Random.Range(xMin,xMax), 10, 10);
+        float posX = Random.Range(xMin,xMax);       
+        if(Mathf.Abs(posX-lastSpawnPosition.x) < 0.4){
+            posX = posX > lastSpawnPosition.x ? posX + 0.4f : posX - 0.4f;
+        }
+        Vector3 pos = new Vector3(posX, 10, 10);
         GameObject block = blocks[Random.Range(0, blocks.Length)];
         Instantiate(block, pos, transform.rotation);
+        lastSpawnPosition = pos;
     }
 
     void SpawnSuperBox() {
-        Vector3 pos = new Vector3(Random.Range(xMin,xMax), 10, 10);
+        float posX = Random.Range(xMin,xMax);       
+        if(Mathf.Abs(posX-lastSpawnPosition.x) < 0.4){
+            posX = posX > lastSpawnPosition.x ? posX + 0.4f : posX - 0.4f;
+        }
+        Vector3 pos = new Vector3(posX, 10, 10);
         GameObject box = SuperBox;
         Instantiate(box, pos, transform.rotation);
+        lastSpawnPosition = pos;
     }
 
     void SpawnSpecialBlock(){

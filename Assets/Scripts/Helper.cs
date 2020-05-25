@@ -6,6 +6,8 @@ public class Helper
 {
     public static int score;
 
+    public static int activeBlocks;
+
     public static int playerMaxShots;
 
     public static int pointsToUpgrade;

@@ -12,6 +12,7 @@ public class Blocks : MonoBehaviour
     void Start()
     {
         speed = Helper.blockSpeed;
+        Helper.activeBlocks++;
     }
 
     // Update is called once per frame
@@ -33,7 +34,8 @@ public class Blocks : MonoBehaviour
     void OnTriggerEnter(Collider col){
         if(col.transform.root.TryGetComponent(out Projectiles p)){
             if (p.Color == this.color){    
-                Helper.score++;            
+                Helper.score++;
+                Helper.activeBlocks--;            
                 gameObject.SetActive(false); 
             }       
         }
