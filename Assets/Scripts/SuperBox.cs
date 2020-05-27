@@ -33,24 +33,29 @@ public class SuperBox : MonoBehaviour
 
     void OnTriggerEnter(Collider col){
         if(col.transform.root.TryGetComponent(out Projectiles p)){
-            superIndex = ((int)(Time.time * 1000) % 3) + 1;  
-        }
-        switch(superIndex){
-            case 1: 
-                Helper.superFireRate = true;
-                gameObject.SetActive(false);
-                p.gameObject.SetActive(false);
-                break;
-            case 2:
-                p.gameObject.SetActive(false);
-                Explode();
-                break;
-            case 3:
-                p.bounce = true;
-                this.gameObject.SetActive(false);
-                break;
-            default:
-                break;
+            superIndex = Random.Range(1,5);  
+        
+            switch(superIndex){
+                case 1: 
+                    Helper.superFireRate = true;
+                    gameObject.SetActive(false);
+                    p.gameObject.SetActive(false);
+                    break;
+                case 2:
+                    p.gameObject.SetActive(false);
+                    Explode();
+                    break;
+                case 3:
+                    p.bounce = true;
+                    this.gameObject.SetActive(false);
+                    break;
+                case 4:
+                    Helper.blockSpeedFactor = 0;
+                    this.gameObject.SetActive(false);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -69,4 +74,6 @@ public class SuperBox : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
+
 }

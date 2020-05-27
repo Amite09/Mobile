@@ -33,7 +33,7 @@ public class BossBlock : MonoBehaviour
 
         transform.Rotate(0, 1, 0);
         if(!Helper.gameOver){
-            transform.position = new Vector3(transform.position.x, transform.position.y - speed, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y - speed * Helper.blockSpeedFactor, transform.position.z);
         }
     }
 
@@ -46,7 +46,7 @@ public class BossBlock : MonoBehaviour
                 Helper.bossShotsLeft *= 2;
                 gameObject.SetActive(false);
             }
-            if(Random.Range(0f,1f) > 0.9){
+            if(Random.Range(0f,1f) > 0.95){
                 changeColor();
             }
         }

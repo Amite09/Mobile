@@ -33,7 +33,7 @@ public class BigColorBlock : MonoBehaviour
 
         transform.Rotate(0, 1, 0);
         if(!Helper.gameOver){
-            transform.position = new Vector3(transform.position.x, transform.position.y - speed, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y - speed * Helper.blockSpeedFactor, transform.position.z);
         }
     }
 

@@ -17,6 +17,7 @@ public class GameStart : MonoBehaviour
         Helper.armorShotsLeft = 5;
         Helper.colorBlockShotsLeft = 5;
         Helper.bossShotsLeft = 50;
+        Helper.blockSpeedFactor = 1;
         Helper.blockSpeed = 0.007f;
         Helper.bossSpeed = 0.0035f;
         Helper.bossFight = false;
@@ -38,6 +39,7 @@ public class GameStart : MonoBehaviour
     {
         checkUpgrade();
         checkBoss();
+        checkBlockSpeed();
 
     }
 
@@ -53,6 +55,12 @@ public class GameStart : MonoBehaviour
                 b.superBoxNextSpawn  = b.superBoxNextSpawn > 5f ? b.superBoxNextSpawn -= 3 : 5f;
                 b.specialBlockNextSpawn = b.specialBlockNextSpawn > 5f ? b.specialBlockNextSpawn -= 1 : 5f;
             }            
+        }
+    }
+
+    void checkBlockSpeed(){
+        if(Helper.blockSpeedFactor == 0){
+            StartCoroutine(resumeBlocks());
         }
     }
 
@@ -76,5 +84,10 @@ public class GameStart : MonoBehaviour
         Vector3 pos = new Vector3(0, 10, 10);
         GameObject b = boss;
         Instantiate(b, pos, transform.rotation);
+    }
+
+    IEnumerator resumeBlocks(){
+        yield return new WaitForSeconds(5f);
+        Helper.blockSpeedFactor = 1;
     }
 }

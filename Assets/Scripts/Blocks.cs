@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Blocks : MonoBehaviour
 {
-
-    public float speed;
     public string color;
+    public float speed;
 
     // Start is called before the first frame update
     void Start()
@@ -20,16 +19,16 @@ public class Blocks : MonoBehaviour
     {
         moveBlock();
         checkHeight();
-        
     }
 
     void moveBlock(){
 
         transform.Rotate(0, 1, 0);
         if(!Helper.gameOver){
-            transform.position = new Vector3(transform.position.x, transform.position.y - speed, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y - speed * Helper.blockSpeedFactor, transform.position.z);
         }
     }
+
 
     void OnTriggerEnter(Collider col){
         if(col.transform.root.TryGetComponent(out Projectiles p)){

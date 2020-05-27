@@ -30,7 +30,7 @@ public class BlockSpawner : MonoBehaviour
     public void Update(){
 
         if(!Helper.bossFight){
-            superBoxCountdown -= Time.deltaTime;
+            
             specialBlockCountdown -= Time.deltaTime;
             theCountdown -= Time.deltaTime;
 
@@ -41,10 +41,12 @@ public class BlockSpawner : MonoBehaviour
                 SpawnBlock();
                 theCountdown = waitingForNextSpawn;
             }
-            if(superBoxCountdown <= 0){
-                SpawnSuperBox();
-                superBoxCountdown = superBoxNextSpawn;
-            }
+
+        }
+        superBoxCountdown -= Time.deltaTime;
+        if(superBoxCountdown <= 0){
+            SpawnSuperBox();
+            superBoxCountdown = superBoxNextSpawn;
         }
     }
 

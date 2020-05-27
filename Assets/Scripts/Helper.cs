@@ -12,6 +12,8 @@ public class Helper
 
     public static int pointsToUpgrade;
 
+    public static int blockSpeedFactor;
+
     public static float blockSpeed;
 
     public static float bossSpeed;
