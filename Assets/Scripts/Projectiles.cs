@@ -67,4 +67,8 @@ public class Projectiles : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    void OnBecameInvisible(){
+        target.x *= -1;        
+    }
+
 }

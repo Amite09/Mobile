@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour
 
     public string[] states;
     public int currentState;
+    public float currentAngle;
 
     public bool superFireRate;
 
@@ -32,25 +33,32 @@ public class PlayerControl : MonoBehaviour
 
     void checkTouches(){
         foreach (Touch touch in Input.touches){
-            if (touch.fingerId == 0){
-                Vector3 _touchPosition = new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 5);
+            if (touch.fingerId == 0 || touch.fingerId == 1){
+                int fid = touch.fingerId;
+                Vector3 _touchPosition = new Vector3(Input.GetTouch(fid).position.x, Input.GetTouch(fid).position.y, 5);
                 Vector3 worldtouchPos = Camera.main.ScreenToWorldPoint(_touchPosition);
-                if(angle == 0){
-                    if(worldtouchPos.x >= 0 && worldtouchPos.y < 0.3){
-                        currentState = (currentState == 0 ? currentState + 3 : currentState - 1);                   
-                        StartCoroutine(rotatePlayer("Left"));
-                    } else if(worldtouchPos.x < 0 && worldtouchPos.y < 0.3){
-                        currentState = (currentState == 3 ? currentState - 3 : currentState + 1);
-                        StartCoroutine(rotatePlayer("Right"));
-                    } 
+                if(worldtouchPos.y < 0.3){
+                    float rotateSpeed = 0.3f;
+                    Touch touchZero = Input.GetTouch(fid);
+                    Vector3 localAngle = this.transform.localEulerAngles;
+                    localAngle.z -= rotateSpeed * touchZero.deltaPosition.x;
+                    this.transform.localEulerAngles = localAngle;
+                    checkState();
+                    // if(worldtouchPos.x >= 0){
+                    //     currentState = (currentState == 0 ? currentState + 3 : currentState - 1);                   
+                    //     StartCoroutine(rotatePlayer("Left"));
+                    // } else if(worldtouchPos.x < 0){
+                    //     currentState = (currentState == 3 ? currentState - 3 : currentState + 1);
+                    //     StartCoroutine(rotatePlayer("Right"));
+                    // } 
                 }
-                if(worldtouchPos.y > 0.3) {
+                else if(worldtouchPos.y > 0.3) {
                     if(!Helper.superFireRate && touch.phase == TouchPhase.Began){
                         StartCoroutine(shoot(worldtouchPos));
                     } else if (Helper.superFireRate) {
                         GameObject proj = Instantiate(projs[currentState], projSpawnPos, Quaternion.identity);
-                        worldtouchPos.x *= 100;
-                        worldtouchPos.y *= 100;
+                        worldtouchPos.x *= 10000;
+                        worldtouchPos.y *= 10000;
                         proj.GetComponent<Projectiles>().Target = worldtouchPos;
                         proj.GetComponent<Projectiles>().Color = states[currentState];
                     }
@@ -62,11 +70,24 @@ public class PlayerControl : MonoBehaviour
         //     GameObject proj = Instantiate(projs[currentState], transform.position, Quaternion.identity);
         //     Vector3 _mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5);
         //     Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(_mousePosition);
-        //     worldMousePos.x *= 100;
-        //     worldMousePos.y *= 100;
+        //     worldMousePos.x *= 10000;
+        //     worldMousePos.y *= 10000;
         //     proj.GetComponent<Projectiles>().Target = worldMousePos;
         //     proj.GetComponent<Projectiles>().Color = states[currentState];
         // }
+
+
+    }
+
+    void checkState(){
+        Vector3 localAngle = this.transform.localEulerAngles;
+        if(localAngle.z > currentAngle + 45){
+            currentAngle += 90;
+            currentState = (currentState == 3 ? currentState - 3 : currentState + 1);
+        } else if (localAngle.z < currentAngle - 45){
+            currentAngle -= 90;
+            currentState = (currentState == 0 ? currentState + 3 : currentState - 1);
+        }
     }
 
     IEnumerator shoot(Vector3 t){
@@ -106,6 +127,10 @@ public class PlayerControl : MonoBehaviour
         }
         angle = 0;
     }
+
+
+
+    
 
 
 }
