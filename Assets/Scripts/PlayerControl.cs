@@ -37,17 +37,17 @@ public class PlayerControl : MonoBehaviour
                 int fid = touch.fingerId;
                 Vector3 _touchPosition = new Vector3(Input.GetTouch(fid).position.x, Input.GetTouch(fid).position.y, 5);
                 Vector3 worldtouchPos = Camera.main.ScreenToWorldPoint(_touchPosition);
-                if(worldtouchPos.y < 0.3){
+                if(worldtouchPos.y < 0.3 && angle == 0){
                     // float rotateSpeed = 0.3f;
                     // Touch touchZero = Input.GetTouch(fid);
                     // Vector3 localAngle = this.transform.localEulerAngles;
                     // localAngle.z -= rotateSpeed * touchZero.deltaPosition.x;
                     // this.transform.localEulerAngles = localAngle;
                     // checkState();
-                    if(worldtouchPos.x >= 0 && angle == 0){
+                    if(worldtouchPos.x >= 0){
                         currentState = (currentState == 0 ? currentState + 3 : currentState - 1);                   
                         StartCoroutine(rotatePlayer("Left"));
-                    } else if(worldtouchPos.x < 0 && angle == 0){
+                    } else if(worldtouchPos.x < 0){
                         currentState = (currentState == 3 ? currentState - 3 : currentState + 1);
                         StartCoroutine(rotatePlayer("Right"));
                     } 
@@ -97,11 +97,11 @@ public class PlayerControl : MonoBehaviour
                 t.x = Random.Range(0.7f * t.x, 1.3f * t.x);
                 t.y = Random.Range(0.7f * t.y, 1.3f * t.y);
             }
-            t.x *= 100;
-            t.y *= 100;
+            t.x *= 10000;
+            t.y *= 10000;
             proj.GetComponent<Projectiles>().Target = t;
             proj.GetComponent<Projectiles>().Color = states[currentState];
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.02f);
         }
     }
 

@@ -10,7 +10,7 @@ public class GameStart : MonoBehaviour
 
     void Awake(){
         Helper.activeBlocks = 0;
-        Helper.pointsToUpgrade = 25;
+        Helper.pointsToUpgrade = 50;
         Helper.pointsToBoss = 50;
         Helper.playerMaxShots = 1;
         Helper.superFireRate = false;
@@ -28,12 +28,6 @@ public class GameStart : MonoBehaviour
     }
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -45,8 +39,8 @@ public class GameStart : MonoBehaviour
 
     void checkUpgrade(){
         if (Helper.score >= Helper.pointsToUpgrade){
-            Helper.pointsToUpgrade += 25;
-            Helper.playerMaxShots = Helper.playerMaxShots < 10 ? Helper.playerMaxShots + 1: Helper.playerMaxShots;
+            Helper.pointsToUpgrade += 50;
+            Helper.playerMaxShots = Helper.playerMaxShots <= 5 ? Helper.playerMaxShots + 1: Helper.playerMaxShots;
             Helper.armorShotsLeft += 5;
             Helper.colorBlockShotsLeft += 2;
             Helper.blockSpeed = Helper.blockSpeed == 0.001f ? Helper.blockSpeed : Helper.blockSpeed += 0.0005f; 

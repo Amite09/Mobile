@@ -29,7 +29,7 @@ public class BlockSpawner : MonoBehaviour
  
     public void Update(){
 
-        if(!Helper.bossFight){
+        if(!Helper.bossFight && Helper.blockSpeedFactor != 0){
             
             specialBlockCountdown -= Time.deltaTime;
             theCountdown -= Time.deltaTime;
